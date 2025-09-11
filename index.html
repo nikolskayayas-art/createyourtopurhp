@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATE YOUR TOP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>CREATE YOUR TOP</h1>
+
+    <div class="format-selector">
+      <button class="format-btn" onclick="changeFormat(event,6)">TOP6</button>
+      <button class="format-btn active" onclick="changeFormat(event,8)">TOP8</button>
+      <button class="format-btn" onclick="changeFormat(event,10)">TOP10</button>
+    </div>
+
+    <div class="pyramid-container" id="pyramid"></div>
+    <div class="contestants-grid" id="contestantsGrid"></div>
+    <div class="watermark">cr. telegram @hiphopprincess_mnet</div>
+  </div>
+
+  <button class="download-btn" onclick="downloadTop()">Download Top</button>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
