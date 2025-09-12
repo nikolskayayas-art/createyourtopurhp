@@ -15,7 +15,7 @@
 
     <div class="format-selector">
       <input id="topSize" type="number" min="1" max="40" value="8" class="format-input">
-      <button class="format-btn" id="setTopBtn">set top</button>
+      <button class="format-btn" onclick="applyTopSize()">set top</button>
       <div class="format-hint">(1–40)</div>
     </div>
 
@@ -23,14 +23,14 @@
 
     <div class="search-box">
       <span>🔍</span>
-      <input type="text" id="searchInput" placeholder="Search by name...">
+      <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterContestants()">
     </div>
 
     <div class="contestants-list">
       <div class="contestants-grid" id="contestantsGrid"></div>
     </div>
 
-    <button class="download-btn" id="downloadBtn">Download Top</button>
+    <button class="download-btn" onclick="downloadTop()">Download Top</button>
 
     <div class="watermark">cr. telegram @hiphopprincess_mnet</div>
   </div>
