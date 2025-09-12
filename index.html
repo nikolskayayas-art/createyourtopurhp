@@ -2,58 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Participants</title>
-  <link rel="stylesheet" href="participants.css">
-</head>
-<body>
-  <nav>
-    <a href="index.html">Главная</a>
-    <a href="participants.html" class="active">Участницы</a>
-  </nav>
-
-  <h1 class="title">Participants</h1>
-
-  <div id="participants-list" class="participants-grid"></div>
-
-  <script src="participants.js"></script>
-</body>
-</html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CREATE YOUR TOP</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Навигация -->
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="participants.html">Participants</a>
+  </nav>
+
+  <!-- Шапка -->
   <img src="https://files.catbox.moe/5u6yjr.jpeg" class="header-img" crossorigin="anonymous">
 
+  <!-- Основной контейнер -->
   <div class="container">
     <h1>CREATE YOUR TOP</h1>
     <div class="subtitle">make your own hiphop princess lineup</div>
 
+    <!-- Выбор размера топа -->
     <div class="format-selector">
       <input id="topSize" type="number" min="1" max="40" value="8" class="format-input">
       <button class="format-btn" onclick="applyTopSize()">set top</button>
       <div class="format-hint">(1–40)</div>
     </div>
 
+    <!-- Пирамида -->
     <div class="pyramid-container" id="pyramid"></div>
 
+    <!-- Поиск -->
     <div class="search-box">
       <span>🔍</span>
       <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterContestants()">
     </div>
 
+    <!-- Список участниц -->
     <div class="contestants-list">
       <div class="contestants-grid" id="contestantsGrid"></div>
     </div>
 
+    <!-- Кнопка скачивания -->
     <button class="download-btn" onclick="downloadTop()">Download Top</button>
 
+    <!-- Водяной знак -->
     <div class="watermark">cr. telegram @hiphopprincess_mnet</div>
   </div>
 
+  <!-- Скрипты -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="script.js"></script>
 </body>
