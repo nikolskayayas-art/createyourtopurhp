@@ -48,18 +48,6 @@ const contestants = {
 let currentFormat = 8;
 let pyramidSlots = [];
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-  // Назначение обработчиков событий
-  document.getElementById('setTopBtn').addEventListener('click', applyTopSize);
-  document.getElementById('downloadBtn').addEventListener('click', downloadTop);
-  document.getElementById('searchInput').addEventListener('input', filterContestants);
-  
-  // Первоначальная отрисовка
-  applyTopSize();
-  renderContestants();
-});
-
 function applyTopSize() {
   const size = parseInt(document.getElementById('topSize').value);
   if(size >= 1 && size <= 40){
@@ -83,7 +71,7 @@ function renderPyramid() {
       if(pyramidSlots[slotIndex]){
         const c = pyramidSlots[slotIndex];
         slot.innerHTML = `
-          <div class="remove-btn" data-index="${slotIndex}">×</div>
+          <div class="remove-btn" onclick="removeFromSlot(${slotIndex}, event)">×</div>
           <img src="${c.image}" class="contestant-img ${c.country}-border">
           ${slotIndex===0 
             ? `<svg class="crown" viewBox="0 0 24 24">
@@ -93,13 +81,6 @@ function renderPyramid() {
             : `<div class="slot-badge">${slotIndex+1}</div>`}
           <div class="contestant-name">${c.name}</div>
         `;
-        
-        // Назначение обработчика события для кнопки удаления
-        const removeBtn = slot.querySelector('.remove-btn');
-        removeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          removeFromSlot(parseInt(this.getAttribute('data-index')));
-        });
       } else {
         slot.innerHTML = `<div class="slot-circle">${slotIndex+1}</div>`;
       }
@@ -118,17 +99,12 @@ function renderContestants() {
   all.forEach(c => {
     const card = document.createElement('div');
     card.className = 'contestant-card';
+    card.onclick = () => addToPyramid(c);
     card.innerHTML = `
       <img src="${c.image}" class="contestant-img ${c.country}-border">
       <div class="contestant-name">${c.name}</div>
       <div class="country-tag ${c.country}-tag">${c.country.toUpperCase()}</div>
     `;
-    
-    // Назначение обработчика события
-    card.addEventListener('click', function() {
-      addToPyramid(c);
-    });
-    
     grid.appendChild(card);
   });
 }
@@ -145,46 +121,51 @@ function filterContestants() {
 function addToPyramid(c) {
   let idx = pyramidSlots.findIndex(s => s===null);
   if(idx !== -1){
-    pyramidSlots[idx]=c;
-    renderPyramid();
-  }
-}
-
-function removeFromSlot(idx) {
-  pyramidSlots[idx]=null;
-  renderPyramid();
-}
-
-function updateDisabledCards() {
-  const grid = document.getElementById('contestantsGrid');
-  const allCards = Array.from(grid.children);
-  const selectedNames = pyramidSlots.filter(Boolean).map(c => c.name);
-  allCards.forEach(card => {
-    const name = card.querySelector('.contestant-name').innerText;
-    if(selectedNames.includes(name)){
-      card.classList.add("disabled");
-    } else {
-      card.classList.remove("disabled");
+        pyramidSlots[idx]=c;
+        renderPyramid();
+      }
     }
-  });
-}
 
-function downloadTop() {
-  const exportContainer = document.createElement("div");
-  exportContainer.style.padding = "20px";
-  exportContainer.style.background = "white";
-  exportContainer.innerHTML = `
-    <h2 style="text-align:center; margin-bottom:10px;">my hiphop princess top ${currentFormat}</h2>
-  `;
-  const clone = document.getElementById("pyramid").cloneNode(true);
-  exportContainer.appendChild(clone);
+    function removeFromSlot(idx, e) {
+      if(e) e.stopPropagation();
+      pyramidSlots[idx]=null;
+      renderPyramid();
+    }
 
-  document.body.appendChild(exportContainer);
-  html2canvas(exportContainer, {useCORS:true}).then(canvas => {
-    const link = document.createElement("a");
-    link.download = `my_hiphop_princess_top_${currentFormat}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-    document.body.removeChild(exportContainer);
-  });
-}
+    function updateDisabledCards() {
+      const grid = document.getElementById('contestantsGrid');
+      const allCards = Array.from(grid.children);
+      const selectedNames = pyramidSlots.filter(Boolean).map(c => c.name);
+      allCards.forEach(card => {
+        const name = card.querySelector('.contestant-name').innerText;
+        if(selectedNames.includes(name)){
+          card.classList.add("disabled");
+        } else {
+          card.classList.remove("disabled");
+        }
+      });
+    }
+
+    function downloadTop() {
+      const exportContainer = document.createElement("div");
+      exportContainer.style.padding = "20px";
+      exportContainer.style.background = "white";
+      exportContainer.innerHTML = `
+        <h2 style="text-align:center; margin-bottom:10px;">my hiphop princess top ${currentFormat}</h2>
+      `;
+      const clone = document.getElementById("pyramid").cloneNode(true);
+      exportContainer.appendChild(clone);
+
+      document.body.appendChild(exportContainer);
+      html2canvas(exportContainer, {useCORS:true}).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `my_hiphop_princess_top_${currentFormat}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        document.body.removeChild(exportContainer);
+      });
+    }
+
+    // init
+    applyTopSize();
+    renderContestants();
