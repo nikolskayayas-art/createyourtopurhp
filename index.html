@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATE YOUR TOP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <img src="https://files.catbox.moe/5u6yjr.jpeg" class="header-img" onerror="this.src='https://via.placeholder.com/1000x180/4a5cd8/ffffff?text=HIPHOP+PRINCESS'">
+
+  <div class="container">
+    <h1>CREATE YOUR TOP</h1>
+    <div class="subtitle">make your own hiphop princess lineup</div>
+
+    <div class="format-selector">
+      <input id="topSize" type="number" min="1" max="40" value="8" class="format-input">
+      <button class="format-btn" id="setTopBtn">set top</button>
+      <div class="format-hint">(1–40)</div>
+    </div>
+
+    <div class="pyramid-container" id="pyramid"></div>
+
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Search by name...">
+    </div>
+
+    <div class="contestants-list">
+      <div class="contestants-grid" id="contestantsGrid"></div>
+    </div>
+
+    <button class="download-btn" id="downloadBtn">Download Top</button>
+
+    <div class="watermark">cr. telegram @hiphopprincess_mnet</div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
