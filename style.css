@@ -524,13 +524,6 @@ h1 {
     padding: 1px 4px;
   }
   
-  .download-btn {
-    padding: 12px 20px;
-    font-size: 0.95em;
-    width: 100%;
-    max-width: 280px;
-  }
-  
   .watermark {
     font-size: 0.8em;
     text-align: center;
