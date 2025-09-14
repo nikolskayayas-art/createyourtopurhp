@@ -489,11 +489,26 @@ h1 {
   }
   
   .remove-btn {
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    opacity: 1; /* Всегда видимые на мобильном */
-  }
+  position: absolute; 
+  top: -5px; 
+  right: -5px;
+  width: 18px; 
+  height: 18px; 
+  background: #ff4d4d; 
+  color: white;
+  border-radius: 50%; 
+  font-size: 12px; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer; 
+  opacity: 0; /* ← Это важно! */
+  transition: opacity 0.2s ease; /* ← Добавь плавность */
+}
+
+.slot:hover .remove-btn { 
+  opacity: 1; /* ← Показываем только при наведении */
+}
   
   .contestants-list {
     max-height: 280px;
