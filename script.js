@@ -289,8 +289,9 @@ function downloadTop() {
       font-size: 14px;
       font-weight: bold;
     }
-    .remove-btn { display: none !important; }
-  `;
+    .slot.innerHTML = `
+  <div class="remove-btn" onclick="removeFromSlot(${slotIndex}, event)">×</div>
+  <img src="${c.image}" class="contestant-img ${c.country}-border">
   
   exportContainer.appendChild(style);
   exportContainer.appendChild(clone);
