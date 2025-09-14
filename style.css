@@ -509,6 +509,14 @@ h1 {
 .slot:hover .remove-btn { 
   opacity: 1; 
 }
+  .remove-btn {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.slot:hover .remove-btn {
+  opacity: 1 !important;
+}
   
   .contestants-list {
     max-height: 280px;
