@@ -502,8 +502,8 @@ h1 {
   align-items: center; 
   justify-content: center; 
   cursor: pointer; 
-  opacity: 0; /* ← Это важно! */
-  transition: opacity 0.2s ease; /* ← Добавь плавность */
+  opacity: 1; 
+  transition: opacity 0.2s ease; 
 }
 
 .slot:hover .remove-btn { 
