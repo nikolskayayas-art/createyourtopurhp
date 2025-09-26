@@ -310,6 +310,96 @@ const participants = [
     mbti: "ENFP",
     hobby: "Doing my own nails",
     specialty: "Cooking"
+  },
+  {
+    name: "나츠호 (Natsuo)",
+    country: "japan",
+    image: "https://files.catbox.moe/59yxls.jpeg",
+    birth: "2009.08.18",
+    height: "164",
+    mbti: "ENTJ",
+    hobby: "Rummikub",
+    specialty: "Brass instruments"
+  },
+{
+    name: "시호 (Shiho)",
+    country: "japan",
+    image: "https://files.catbox.moe/e7wn7o.jpeg",
+    birth: "2009.05.16",
+    height: "156.4",
+    mbti: "ENFP",
+    hobby: "Sports, sleeping, eating delicious food, Playing with my dog",
+    specialty: "Piano, ballet, penmanship, recorder"
+  },
+{
+    name: "사아야 (Saaya)",
+    country: "japan",
+    image: "https://files.catbox.moe/kl0iab.jpeg",
+    birth: "2008.10.14",
+    height: "166",
+    mbti: "ENFP",
+    hobby: "Illustration, watching animation",
+    specialty: "Singing, illustration"
+  },
+{
+    name: "세나 (Sena)",
+    country: "japan",
+    image: "https://files.catbox.moe/mesqqc.jpeg",
+    birth: "2009.01.09",
+    height: "153",
+    mbti: "ESFJ",
+    hobby: "Riding thrill rides to blow off stress, Watching Korean dramas, watching live performances",
+    specialty: "Creating spontaneous choreography to music"
+  },
+{
+    name: "니코 (Niko)",
+    country: "japan",
+    image: "https://files.catbox.moe/ujjen2.jpeg",
+    birth: "2008.11.24",
+    height: "157",
+    mbti: "ENFP",
+    hobby: "Singing, rap, thrifting vintage clothes, Listening to tracks and doing covers",
+    specialty: "Abacus, mental math (especially addition), Memorizing songs and raps quickly"
+  },
+{
+    name: "나나 (Nana)",
+    country: "japan",
+    image: "https://files.catbox.moe/00pgec.jpeg",
+    birth: "2010.02.07",
+    height: "163",
+    mbti: "ESFJ",
+    hobby: "Makeup, dancing",
+    specialty: "Making various facial expressions"
+  },
+{
+    name: "세아 (Sea)",
+    country: "japan",
+    image: "https://files.catbox.moe/6h0ccd.jpeg",
+    birth: "2010.11.03",
+    height: "156",
+    mbti: "ENFJ",
+    hobby: "Sports",
+    specialty: "Dancing"
+  },
+{
+    name: "사사 (Sasa)",
+    country: "japan",
+    image: "https://files.catbox.moe/2frtrj.jpeg",
+    birth: "2010.02.06",
+    height: "163",
+    mbti: "ESFP",
+    hobby: "Listening to music",
+    specialty: "Drawing, cheerleading"
+  },
+{
+    name: "리노 (Rino)",
+    country: "japan",
+    image: "https://files.catbox.moe/ju3y20.jpeg",
+    birth: "2008.11.03",
+    height: "161",
+    mbti: "ESFP",
+    hobby: "Sleeping, dancing",
+    specialty: "Acting"
   }
 ];
 
