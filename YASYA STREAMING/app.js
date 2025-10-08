@@ -1,0 +1,502 @@
+    // Replace I'LL-IT variants with 'группа' / 'group'
+    function replaceGroupName(text, lang) {
+        return text.replace(/I['’]LL-IT/gi, lang === 'ru' ? 'группа' : 'group');
+      }
+  
+      // Get KST time using Intl; fallback if not available
+      function updateKoreaTime() {
+        let kst;
+        try {
+          kst = new Intl.DateTimeFormat('en-GB', {
+            hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Seoul'
+          }).format(new Date());
+        } catch (e) {
+          const now = new Date();
+          const ms = now.getTime() + (6 * 60 * 60 * 1000);
+          const d = new Date(ms);
+          kst = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+        }
+        document.getElementById('time-display').textContent = kst;
+      }
+  
+      // Full content in both languages. Russian originals first (for ru), English translations for en.
+      const content = {
+        ru: {
+          youtube: `
+            <div>
+              <p><strong>Стриминг на YouTube — Как правильно стримить?</strong></p>
+              <ul>
+                <li>Войдите в аккаунт, зарегистрированный в YouTube.</li>
+              </ul>
+  
+              <div class="note">
+                <p><strong>Особенно важный момент:</strong></p>
+                <ul>
+                  <li>Между просмотрами обязательно включайте другие видео суммарной длительностью более 5 минут.</li>
+                  <li>Используйте те видео, которые обычно смотрите, преимущественно с других каналов — так YouTube не будет принимать вас за ботов и фильтровать просмотры.</li>
+                </ul>
+              </div>
+  
+              <div class="warning">
+                <p><strong>Что запрещено делать?</strong></p>
+                <ul>
+                  <li>Включать режим инкогнито или использовать VPN.</li>
+                  <li>Удалять историю просмотров или кэш.</li>
+                  <li>Ускорять видео, ставить его на паузу или перематывать.</li>
+                  <li>Использовать плейлист первые двое суток после релиза.</li>
+                  <li>Смотреть видео в нескольких вкладках одновременно.</li>
+                </ul>
+              </div>
+            </div>
+          `,
+          spotify: `
+            <div>
+              <p><strong>Стриминг на Spotify — Руководство</strong></p>
+              <div class="important">
+                <p><strong>Важно:</strong> Стримы не будут засчитаны при использовании взломанных версий приложения.</p>
+              </div>
+  
+              <p><strong>Что нужно делать?</strong></p>
+              <ul>
+                <li>Между прослушиванием нашей группы слушайте подборку песен других не k-pop исполнителей.</li>
+                <li>Обновляйте созданный плейлист каждые несколько дней, соблюдая рекомендованный порядок.</li>
+                <li>Взаимодействуйте с приложением: переключайте плейлисты, лайкайте или пропускайте треки, пользуйтесь поиском.</li>
+              </ul>
+  
+              <div class="warning">
+                <p><strong>Что запрещено?</strong></p>
+                <ul>
+                  <li>Использовать VPN.</li>
+                  <li>Выключать звук или ставить его ниже 50%.</li>
+                  <li>Ставить плейлист или альбом на повтор.</li>
+                  <li>Перематывать или пропускать трек, который стримите.</li>
+                </ul>
+              </div>
+            </div>
+          `,
+          applemusic: `
+            <div>
+              <p><strong>Стриминг на Apple Music — Что нужно знать</strong></p>
+  
+              <div class="warning">
+                <p><strong>Что запрещено?</strong></p>
+                <ul>
+                  <li>Использовать VPN.</li>
+                  <li>Выключать звук или ставить его ниже 50%.</li>
+                  <li>Ставить плейлист или альбом на повтор.</li>
+                  <li>Перематывать или пропускать текущий трек.</li>
+                  <li>Перемешивать плейлист или выключать автопроигрывание.</li>
+                </ul>
+              </div>
+  
+              <p><strong>Особенности</strong></p>
+              <ul>
+                <li>Если используете один Apple ID в iTunes и Apple Music и купили трек в iTunes, удалите загруженную копию из Apple Music и медиатеки, иначе стрим не будет засчитан.</li>
+                <li>Взаимодействуйте с приложением: меняйте плейлисты, лайкайте и пропускайте треки, используйте поиск.</li>
+              </ul>
+            </div>
+          `,
+          inkigayo: `
+            <div>
+              <p><strong>INKIGAYO — Информация</strong></p>
+              <p>Голосование Inkigayo разделено на платформы: Idol Plus и Superstar X. Есть несколько типов голосований.</p>
+              <ul>
+                <li>Предварительное (Idol Plus).</li>
+                <li>Живое (Superstar X).</li>
+                <li>Hot Stage (Superstar X).</li>
+              </ul>
+  
+              <p><strong>Накопление рубинов в Superstar X</strong></p>
+              <ul>
+                <li>Нажмите значок в правом верхнем углу, выберите "Charge" и кнопку "Play" для просмотра рекламы (иногда требуется VPN);</li>
+                <li>Выполняйте миссии — они доступны без VPN.</li>
+              </ul>
+  
+              <p><strong>Живое голосование</strong></p>
+              <ul>
+                <li>Голосование проходит во время шоу каждое воскресенье примерно с 15:40 до 16:40 по КСТ.</li>
+                <li>Нажмите "Vote"/"Apply", выберите вкладку "Real-time" и найдите выпуск с меткой "On Voting".</li>
+                <li>Найдите в списке группу и нажмите "Vote".</li>
+                <li>Нажмите "All Use" или "+" чтобы выбрать вручную, затем подтвердите "Vote".</li>
+                <li>До 5 голосов с одного аккаунта. 1 голос = 50 рубинов, 5 голосов = 250 рубинов.</li>
+              </ul>
+  
+              <p><strong>Hot Stage</strong></p>
+              <ul>
+                <li>Выберите вкладку "Hot Stage", найдите выпуск "On Voting", найдите группу и проголосуйте.</li>
+                <li>1 голос = 30 рубинов, 5 голосов = 150 рубинов. До 5 голосов с одного аккаунта.</li>
+              </ul>
+  
+              <p><strong>Idol Plus</strong></p>
+              <ul>
+                <li>Сайт — https://idolplus.com/</li>
+                <li>Предварительное голосование: с 12:00 понедельника по 23:59 пятницы по КСТ.</li>
+                <li>Голосовать можно раз в 24 часа с одного аккаунта. Новый день начинается в 00:00 по КСТ.</li>
+              </ul>
+            </div>
+          `,
+          mcountdown: `
+            <div>
+              <p><strong>M COUNTDOWN</strong></p>
+              <p>"M Countdown" выходит в эфир каждый вторник в 18:00 по КСТ.</p>
+              <p>Голосование через Mnet Plus: предварительное и живое.</p>
+  
+              <p><strong>Pre-voting</strong></p>
+              <ul>
+                <li>Pre-voting: с 00:00 понедельника по 23:59 следующего понедельника по КСТ.</li>
+                <li>На главной странице выберите "Pre-vote" и нажмите "Vote".</li>
+                <li>Найдите группу, нажмите "Vote", посмотрите рекламу — голос будет засчитан.</li>
+                <li>1 аккаунт = 1 голос. Просим зарегистрировать как можно больше аккаунтов.</li>
+              </ul>
+  
+              <p><strong>Live voting</strong></p>
+              <ul>
+                <li>Live voting проходит во время шоу во вторник в 18:00 по КСТ.</li>
+                <li>Процесс аналогичен предварительному, только выбирайте "Live".</li>
+              </ul>
+            </div>
+          `,
+          theshow: `
+            <div>
+              <p><strong>THE SHOW</strong></p>
+              <p>Star Planet — приложение для голосования за The Show.</p>
+              <ul>
+                <li>Шоу выходит в эфир во вторник в 18:00 по КСТ. Предварительное голосование: с пятницы 20:00 по КСТ до понедельника 14:00 по КСТ.</li>
+                <li>Голосование во время шоу открывается с началом эфира.</li>
+              </ul>
+  
+              <p><strong>Сбор валюты</strong></p>
+              <ul>
+                <li>Heart Jelly — валюта. Накопления обнуляются 16 числа каждого месяца.</li>
+                <li>Можно создавать неограниченное количество аккаунтов.</li>
+                <li>Ищите клип вручную, ставьте громкость больше 50% и качество не ниже 720p.</li>
+                <li>Лайк и комментарий оставляйте только после просмотра полного M/V.</li>
+                <li>1 реклама = 5 Heart Jelly, максимум 10 реклам в день. Счётчик обновляется в 00:00 по КСТ.</li>
+                <li>Для голосования нужно 500 Heart Jelly (примерно 10 дней при 10 реклам/день).</li>
+              </ul>
+            </div>
+          `,
+          musicbank: `
+            <div>
+              <p><strong>MUSIC BANK & SHOW! MUSIC CORE</strong></p>
+              <div class="note">
+                <p><strong>Примечание:</strong></p>
+                <ul>
+                  <li>Music Bank: эфир в пятницу в 17:00 по КСТ. Pre-voting: понедельник 11:00 — среда 11:00 по КСТ.</li>
+                  <li>Show! Music Core: эфир в субботу в 15:15 по КСТ. Pre-voting: вторник 18:00 — четверг 11:00 по КСТ. Live voting открывается после объявления топ-3.</li>
+                </ul>
+              </div>
+  
+              <p><strong>Сбор валют</strong></p>
+              <ul>
+                <li>Mubeat: Heart Beats и Star Beats. Для голосований используются Heart Beats.</li>
+                <li>Heart Beats истекают через 90 дней после получения.</li>
+                <li>Реклама: 15 показов в сутки, 1 просмотр = 3 Heart Beats. Счётчик обновляется в 00:00 по КСТ.</li>
+                <li>До 7 аккаунтов на устройстве — используйте эту возможность.</li>
+              </ul>
+            </div>
+          `,
+          showchampion: `
+            <div>
+              <p><strong>SHOW CHAMPION</strong></p>
+              <p>IDOLCHAMP используется для голосования и промо.</p>
+              <ul>
+                <li>Show Champion: эфир в среду в 18:00 по КСТ. Pre-voting: пятница 20:00 — понедельник 14:00 по КСТ.</li>
+              </ul>
+  
+              <p><strong>Типы валют</strong></p>
+              <ul>
+                <li>Рубиновые чамизм — постоянные.</li>
+                <li>Временные чамизм — истекают 1-го числа месяца.</li>
+                <li>Звёздные чамизм — за рекламу; 5 звёздных = 1 рубиновый.</li>
+              </ul>
+  
+              <p><strong>Сбор</strong></p>
+              <ul>
+                <li>Тесты, миссии, загрузки приложений, подписки, рулетка после голосования (1 раз в день), ежедневные отметки.</li>
+              </ul>
+  
+              <div class="note">
+                <p><strong>Примечание:</strong> Подключение к южнокорейскому серверу VPN может дать больше миссий и наград.</p>
+              </div>
+            </div>
+          `
+        },
+  
+        en: {
+          youtube: `
+            <div>
+              <p><strong>Streaming on YouTube — How to stream correctly?</strong></p>
+              <ul>
+                <li>Log into your registered YouTube account.</li>
+              </ul>
+  
+              <div class="note">
+                <p><strong>Important:</strong></p>
+                <ul>
+                  <li>Between views, be sure to play other videos totaling more than 5 minutes.</li>
+                  <li>Use videos you normally watch, preferably from other channels — this reduces the chance YouTube will mark you as a bot and filter views.</li>
+                </ul>
+              </div>
+  
+              <div class="warning">
+                <p><strong>What is prohibited?</strong></p>
+                <ul>
+                  <li>Use incognito mode or VPN.</li>
+                  <li>Delete watch history or cache.</li>
+                  <li>Speed up, pause, or rewind the video.</li>
+                  <li>Use a playlist during the first two days after release.</li>
+                  <li>Watch videos in multiple tabs at once.</li>
+                </ul>
+              </div>
+            </div>
+          `,
+          spotify: `
+            <div>
+              <p><strong>Streaming on Spotify — Guide</strong></p>
+              <div class="important">
+                <p><strong>Important:</strong> Streams will not count if hacked versions of Spotify are used.</p>
+              </div>
+  
+              <p><strong>What should you do?</strong></p>
+              <ul>
+                <li>Between streaming the group, listen to a selection of songs by other non-k-pop artists.</li>
+                <li>Update the playlist every few days while following the recommended order.</li>
+                <li>Interact with Spotify: change playlists, like/skip tracks, and use search occasionally to avoid bot detection.</li>
+              </ul>
+  
+              <div class="warning">
+                <p><strong>What is prohibited?</strong></p>
+                <ul>
+                  <li>Use VPN.</li>
+                  <li>Turn off the sound or set it below 50%.</li>
+                  <li>Set the playlist/album on repeat.</li>
+                  <li>Rewind or skip the track you are streaming.</li>
+                </ul>
+              </div>
+            </div>
+          `,
+          applemusic: `
+            <div>
+              <p><strong>Streaming on Apple Music — What to know</strong></p>
+  
+              <div class="warning">
+                <p><strong>What is prohibited?</strong></p>
+                <ul>
+                  <li>Use VPN.</li>
+                  <li>Turn off sound or set it below 50%.</li>
+                  <li>Set playlist or album on repeat.</li>
+                  <li>Rewind or skip the track being streamed.</li>
+                  <li>Shuffle the playlist or disable autoplay.</li>
+                </ul>
+              </div>
+  
+              <p><strong>Notes</strong></p>
+              <ul>
+                <li>If you use the same Apple ID in iTunes and Apple Music and you bought a track in iTunes, immediately remove the downloaded copy from Apple Music and your media library; otherwise your streams may not count.</li>
+                <li>Interact with the app to avoid being recognized as bot behavior: change playlists, like/skip tracks, and use search.</li>
+              </ul>
+            </div>
+          `,
+          inkigayo: `
+            <div>
+              <p><strong>Inkigayo — Overview</strong></p>
+              <p>Inkigayo voting is split between platforms: Idol Plus and Superstar X. There are several types of voting.</p>
+              <ul>
+                <li>Pre-voting (Idol Plus).</li>
+                <li>Live voting (Superstar X).</li>
+                <li>Hot Stage voting (Superstar X).</li>
+              </ul>
+  
+              <p><strong>Ruby accumulation in Superstar X</strong></p>
+              <ul>
+                <li>Tap the ruby-like icon at the top-right, choose "Charge" and press the large "Play" to watch ads (some ads may require VPN);</li>
+                <li>Complete missions (available without VPN).</li>
+              </ul>
+  
+              <p><strong>Live voting</strong></p>
+              <ul>
+                <li>Voting runs during the show every Sunday approximately from 15:40 to 16:40 KST.</li>
+                <li>Tap "Vote"/"Apply", choose the "Real-time" tab and find the episode marked "On Voting".</li>
+                <li>Find the group in the list and tap "Vote".</li>
+                <li>Tap "All Use" to spend rubies instantly or "+" to select manually, then confirm "Vote".</li>
+                <li>You can give up to 5 votes per account. 1 vote = 50 rubies; 5 votes = 250 rubies.</li>
+              </ul>
+  
+              <p><strong>Hot Stage</strong></p>
+              <ul>
+                <li>Choose the "Hot Stage" tab and find the episode marked "On Voting".</li>
+                <li>Find the group and tap "Vote". Confirm in the next window and choose "All Use" or add rubies manually, then "Vote".</li>
+                <li>Up to 5 votes per account. 1 vote = 30 rubies; 5 votes = 150 rubies.</li>
+              </ul>
+  
+              <p><strong>Idol Plus</strong></p>
+              <ul>
+                <li>Website — https://idolplus.com/</li>
+                <li>Pre-voting runs from 12:00 Monday to 23:59 Friday KST.</li>
+                <li>You can vote once every 24 hours per account. The new day starts at 00:00 KST.</li>
+                <li>Log in, scroll down, select two extra candidates besides the group, and press "Vote". Avoid major competitors when choosing extras.</li>
+              </ul>
+            </div>
+          `,
+          mcountdown: `
+            <div>
+              <p><strong>M COUNTDOWN</strong></p>
+              <p>"M Countdown" airs every Tuesday at 18:00 KST.</p>
+              <p>Voting is via the Mnet Plus app and includes both pre-voting and live voting.</p>
+  
+              <p><strong>Pre-voting</strong></p>
+              <ul>
+                <li>Pre-voting runs from 00:00 KST on one Monday to 23:59 KST on the next Monday.</li>
+                <li>On the main page select "Pre-vote" and press "Vote". Find the group, press "Vote", watch the ad and your vote will be counted.</li>
+                <li>1 account = 1 vote. Please register as many accounts as possible.</li>
+              </ul>
+  
+              <p><strong>Live voting</strong></p>
+              <ul>
+                <li>Live voting takes place during the show on Tuesday at 18:00 KST.</li>
+                <li>The process is the same as pre-voting; choose "Live" instead of "Pre-vote".</li>
+              </ul>
+            </div>
+          `,
+          theshow: `
+            <div>
+              <p><strong>THE SHOW</strong></p>
+              <p>Star Planet is the voting app for The Show.</p>
+              <ul>
+                <li>The show airs on Tuesday at 18:00 KST. Pre-voting runs from Friday 20:00 KST to Monday 14:00 KST.</li>
+                <li>Live voting opens as soon as the broadcast starts.</li>
+              </ul>
+  
+              <p><strong>Currency collection</strong></p>
+              <ul>
+                <li>The currency is Heart Jelly. Accumulated currency resets on the 16th of each month.</li>
+                <li>You can create unlimited accounts — please create as many as you can.</li>
+                <li>Search clips manually, set volume above 50% and quality above 720p.</li>
+                <li>Leave a like/comment only after watching the full M/V.</li>
+                <li>To get Heart Jelly watch ads: 1 ad = 5 currency, max 10 ads/day. Ad counter resets at 00:00 KST.</li>
+                <li>We need 500 Heart Jelly for voting (about 10 days at 10 ads/day).</li>
+              </ul>
+            </div>
+          `,
+          musicbank: `
+            <div>
+              <p><strong>MUSIC BANK & SHOW! MUSIC CORE</strong></p>
+              <div class="note">
+                <p><strong>Note:</strong></p>
+                <ul>
+                  <li>Music Bank airs on Friday at 17:00 KST. Pre-voting: Monday 11:00 — Wednesday 11:00 KST.</li>
+                  <li>Show! Music Core airs on Saturday at 15:15 KST. Pre-voting: Tuesday 18:00 — Thursday 11:00 KST. Live voting opens shortly after top-3 is announced.</li>
+                </ul>
+              </div>
+  
+              <p><strong>Currency collection</strong></p>
+              <ul>
+                <li>Mubeat has Heart Beats and Star Beats; Heart Beats are used for voting.</li>
+                <li>Heart Beats expire 90 days after accumulation; plan farming before releases.</li>
+                <li>Get currency by watching ads (15 ads per 24 hours, 1 view = 3 Heart Beats). Ad counter resets at 00:00 KST.</li>
+                <li>You can create up to 7 accounts per device — use this opportunity.</li>
+              </ul>
+            </div>
+          `,
+          showchampion: `
+            <div>
+              <p><strong>SHOW CHAMPION</strong></p>
+              <p>IDOLCHAMP is used for Show Champion voting and promotions.</p>
+              <ul>
+                <li>Show Champion airs on Wednesday at 18:00 KST. Pre-voting runs from Friday 20:00 KST to Monday 14:00 KST.</li>
+              </ul>
+  
+              <p><strong>Currency types</strong></p>
+              <ul>
+                <li>Ruby charms — permanent. Earn via roulettes, missions and weekly tasks.</li>
+                <li>Temporary charms — expire on the 1st of each month. Earn via daily check-ins and tests.</li>
+                <li>Star charms — for ads; 5 star charms = 1 ruby charm.</li>
+              </ul>
+  
+              <p><strong>How to collect charms</strong></p>
+              <ul>
+                <li>Complete weekly tests.</li>
+                <li>Support artists (exchange to ruby charms).</li>
+                <li>Participate in missions like downloading apps or following social accounts.</li>
+                <li>Spin the roulette after voting (once per day) until daily limits are reached.</li>
+                <li>Check in daily in Idolchamp for temporary charms.</li>
+                <li>Watch ads to earn star charms (up to 10 times/day).</li>
+              </ul>
+  
+              <div class="note">
+                <p><strong>Note:</strong> Connecting to a South Korean VPN server may give more missions and better rewards.</p>
+              </div>
+            </div>
+          `
+        }
+      };
+  
+      // Accordion init
+      function initAccordion() {
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(acc => {
+          const header = acc.querySelector('.accordion-header');
+          const content = acc.querySelector('.accordion-content');
+          header.addEventListener('click', () => {
+            accordions.forEach(a => {
+              if (a !== acc) {
+                a.classList.remove('active');
+                a.querySelector('.accordion-content').classList.remove('active');
+                const icon = a.querySelector('.accordion-icon');
+                if (icon) icon.style.transform = '';
+              }
+            });
+            acc.classList.toggle('active');
+            content.classList.toggle('active');
+            const icon = acc.querySelector('.accordion-icon');
+            if (icon) icon.style.transform = acc.classList.contains('active') ? 'rotate(180deg)' : '';
+          });
+        });
+      }
+  
+      // Render content for selected language
+      function renderContent(lang) {
+        // Page title remains English per request
+        document.getElementById('page-title').textContent = 'Streaming & Voting Guide';
+  
+        // Time label: RU => 'КСТ:' (no "Корея"), EN => 'KST (Korea):'
+        const timeLabel = document.getElementById('time-label');
+        const languageLabel = document.getElementById('language-label');
+        if (lang === 'ru') {
+          timeLabel.textContent = 'КСТ:';
+          languageLabel.textContent = 'Язык:';
+        } else {
+          timeLabel.textContent = 'KST (Korea):';
+          languageLabel.textContent = 'Language:';
+        }
+  
+        // Streaming
+        document.getElementById('youtube-content').innerHTML = replaceGroupName(content[lang].youtube, lang);
+        document.getElementById('spotify-content').innerHTML = replaceGroupName(content[lang].spotify, lang);
+        document.getElementById('applemusic-content').innerHTML = replaceGroupName(content[lang].applemusic, lang);
+  
+        // Voting
+        document.getElementById('inkigayo-content').innerHTML = replaceGroupName(content[lang].inkigayo, lang);
+        document.getElementById('mcountdown-content').innerHTML = replaceGroupName(content[lang].mcountdown, lang);
+        document.getElementById('theshow-content').innerHTML = replaceGroupName(content[lang].theshow, lang);
+        document.getElementById('musicbank-content').innerHTML = replaceGroupName(content[lang].musicbank, lang);
+        document.getElementById('showchampion-content').innerHTML = replaceGroupName(content[lang].showchampion, lang);
+      }
+  
+      // DOM ready
+      document.addEventListener('DOMContentLoaded', () => {
+        initAccordion();
+  
+        // initial render in Russian (user preference)
+        renderContent('ru');
+  
+        // Update KST time every minute
+        updateKoreaTime();
+        setInterval(updateKoreaTime, 60000);
+  
+        // language switch
+        document.getElementById('language-select').addEventListener('change', (e) => {
+          renderContent(e.target.value);
+        });
+      });

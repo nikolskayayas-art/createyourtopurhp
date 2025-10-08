@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voting - HipHop Princess</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="participants.html">Participants</a>
+    <a href="vote.html" class="active">Voting</a>
+    <a href="streaming.html">Streaming</a>
+  </nav>
+
+  <div class="vote-container">
+    <h1>Vote for Your Favorites</h1>
+
+    <div class="vote-type-selector">
+      <button class="vote-type-btn active" data-type="top1">One Pick (Top 1)</button>
+      <button class="vote-type-btn" data-type="top3">Top 3</button>
+      <button class="vote-type-btn" data-type="top8">Top 8</button>
+    </div>
+
+    <div id="votingStatus" class="voting-status"></div>
+
+    <div class="selection-info" id="selectionInfo">Select 1 contestant</div>
+
+    <div class="vote-content">
+      <!-- Live results moved up -->
+      <div class="results-section">
+        <div class="results-title">
+          <div id="resultsTitleText">Live Results - One Pick</div>
+          <div><button id="toggleResultsBtn" class="vote-type-btn" style="background:#6c6cff">Show Live Results</button></div>
+        </div>
+        <div id="resultsContainer" class="results-container" aria-live="polite"></div>
+      </div>
+
+      <div class="vote-section">
+        <div id="voteGrid" class="vote-grid" aria-live="polite"></div>
+
+        <!-- <div style="text-align:center;margin:15px 0;font-weight:bold;color:#663a99">Selected Contestants (click to remove)</div> -->
+        <div id="selectedContestants" class="selected-contestants" aria-live="polite"></div>
+
+        <div id="voteMessage" class="vote-message" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed bottom basket with Vote button inside -->
+  <div class="vote-basket" id="voteBasket" aria-hidden="true">
+    <div class="basket-title">Selected Contestants</div>
+    <div class="basket-contestants" id="basketContestants">
+      <!-- <div class="empty-basket" style="color:#999;text-align:center">No contestants selected</div> -->
+    </div>
+    <div style="text-align:center; margin-top:8px;">
+      <button id="basketVoteBtn" class="vote-submit" style="display:none">Vote</button>
+    </div>
+  </div>
+
+  <!-- Confirmation modal -->
+  <div class="confirmation-modal" id="confirmationModal" aria-hidden="true">
+    <div class="confirmation-content">
+      <h3 class="confirmation-title" id="confirmationTitle">Confirm Your Vote</h3>
+      <div id="confirmationContestants" class="confirmation-contestants"></div>
+      <p>Are you sure you want to submit your vote?</p>
+      <div class="confirmation-buttons">
+        <button class="confirm-btn confirm" id="confirmVote">Confirm</button>
+        <button class="confirm-btn cancel" id="cancelVote">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

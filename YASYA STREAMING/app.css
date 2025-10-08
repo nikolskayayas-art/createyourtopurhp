@@ -1,0 +1,127 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg,#4a5cd8 0%,#663a99 100%);
+  min-height: 100vh;
+  color: #222;
+  padding-bottom: 40px;
+}
+
+/* NAV */
+nav {
+  width: 100%;
+  background: #2d1b4e;
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+nav a:hover { background: rgba(255,255,255,0.12); }
+nav a.active { background: #fff; color: #2d1b4e; }
+
+.guide-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Title: always English as requested */
+h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.header-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: nowrap;
+  overflow-x: auto;       /* on small screens allow horizontal scroll instead of stacking */
+  padding-bottom: 6px;
+}
+
+.language-selector, .current-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background:#fff;
+  padding:8px 12px;
+  border-radius:20px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.06);
+  flex: 0 0 auto;         /* keep inline on small screens */
+}
+
+select { border:none; background:transparent; outline:none; font-size:14px; }
+
+.current-time strong { font-weight:700; }
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.panel {
+  background:#f6f6fb;
+  border-radius:12px;
+  padding:12px;
+}
+
+h2 { font-size:16px; margin-bottom:10px; text-transform:uppercase; text-align:center; color:#663a99; }
+
+.accordion { background:#fff; border-radius:10px; margin-bottom:10px; overflow:hidden; border:1px solid #eee; }
+.accordion-header {
+  padding:14px 18px; background:#663a99; color:#fff; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:700; text-transform:uppercase;
+}
+.accordion-content { padding:0 18px; max-height:0; overflow:hidden; transition: max-height .28s ease, padding .28s ease; }
+.accordion-content.active { padding:16px 18px; max-height:4000px; }
+.accordion-content p { margin-bottom:10px; line-height:1.5; }
+.accordion-content ul { padding-left:18px; margin-bottom:10px; }
+.note { background:#fff3cd; border-left:4px solid #ffc107; padding:10px 12px; margin:12px 0; border-radius:4px; }
+.warning { background:#f8d7da; border-left:4px solid #dc3545; padding:10px 12px; margin:12px 0; border-radius:4px; }
+.important { background:#d1ecf1; border-left:4px solid #0dcaf0; padding:10px 12px; margin:12px 0; border-radius:4px; }
+
+@media (max-width:767px) {
+  .header-controls { flex-direction: row; align-items: center; }
+  nav { padding: 8px; justify-content: flex-start; }
+  .guide-container { margin:10px; padding:14px; }
+}
+.guide-container + div {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .guide-container + div a {
+    opacity: 0.6;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .guide-container + div a:hover {
+    opacity: 0.9;
+  }

@@ -1,0 +1,84 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; background: linear-gradient(135deg,#4a5cd8 0%,#663a99 100%); min-height:100vh; color:#222; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+nav {
+  width:100%; background:#2d1b4e; display:flex; gap:12px; padding:10px; overflow-x:auto; white-space:nowrap;
+  align-items:center; justify-content:center; position:sticky; top:0; z-index:1000;
+}
+nav a { color:#fff; text-decoration:none; font-weight:bold; padding:8px 12px; border-radius:6px; display:inline-block; flex:0 0 auto; }
+nav a:hover { background: rgba(255,255,255,0.12); }
+nav a.active { background:#fff; color:#2d1b4e; }
+
+.vote-container { max-width:1200px; margin:20px auto; background:#fff; border-radius:15px; padding:20px; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+h1 { text-align:center; text-transform:uppercase; color:#222; margin-bottom:15px; }
+
+.vote-type-selector { display:flex; justify-content:center; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.vote-type-btn { padding:10px 20px; border-radius:20px; background:#808080; color:#fff; border:none; cursor:pointer; font-weight:700; }
+.vote-type-btn.active { background:#555555; }
+
+.vote-content { display:flex; flex-direction:column; gap:20px; }
+@media(min-width:768px) { .vote-content{flex-direction:row} .vote-section{flex:1} .results-section{flex:0 0 340px} }
+
+.vote-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:15px; margin-bottom:20px; }
+.vote-card { display:flex; align-items:center; gap:15px; background:#f8f8f8; border-radius:12px; padding:10px 15px; cursor:pointer; transition:.3s; border:2px solid transparent; position:relative; }
+.vote-card:hover { transform:translateY(-3px); box-shadow:0 5px 10px rgba(0,0,0,0.1); }
+.vote-card.selected { border-color:#663a99; background:#f0e6ff; }
+.vote-card.disabled { opacity:.6; cursor:not-allowed; }
+
+.vote-avatar{width:60px;height:60px;border-radius:50%;border:3px solid #663a99;object-fit:cover}
+.vote-name{flex:1;font-weight:700;text-transform:capitalize}
+.vote-count{min-width:55px;text-align:right;color:#663a99;font-weight:700}
+.vote-bar-container{position:absolute;left:15px;right:15px;bottom:-10px;height:8px;background:#ddd;border-radius:4px;overflow:hidden}
+.vote-bar{height:100%;width:0;background:#663a99;transition:width .5s}
+
+.vote-actions{display:flex;justify-content:center;gap:10px;margin-top:20px}
+.vote-submit{padding:10px 25px;border-radius:20px;background:#808080;color:#fff;border:none;cursor:pointer;font-weight:700}
+.vote-submit:disabled{background:#cccccc;cursor:not-allowed}
+
+.results-container{background:#f8f8f8;border-radius:12px;padding:15px;max-height:600px;overflow-y:auto;display:none}
+.results-container.visible{display:block}
+.results-title{display:flex;justify-content:space-between;align-items:center;color:#663a99;font-weight:700;margin-bottom:12px}
+
+.result-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:8px;background:#fff;border-radius:8px}
+.result-item.highlight{background:#f0e6ff;border-left:4px solid #663a99}
+.result-rank{font-weight:bold;width:28px;text-align:center;color:#663a99}
+.result-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.result-name{flex:1;text-transform:capitalize}
+.result-votes{font-weight:bold;color:#663a99;width:40px;text-align:right}
+
+.vote-message{display:none;text-align:center;padding:10px;border-radius:8px;margin-top:10px}
+.vote-message.success{display:block;background:#e8f5e9;color:#2e7d32}
+.vote-message.error{display:block;background:#ffebee;color:#c62828}
+.vote-message.info{display:block;background:#e3f2fd;color:#1565c0}
+
+.selection-info{text-align:center;margin-bottom:15px;color:#666;font-size:14px}
+.selected-contestants{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;justify-content:center;background:#f0f0f0;border-radius:10px;padding:15px;min-height:80px}
+.selected-contestant{display:flex;align-items:center;gap:8px;background:#f0e6ff;border-radius:20px;padding:5px 10px;font-size:14px;cursor:pointer}
+.selected-contestant img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+
+.confirmation-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center;z-index:2000}
+.confirmation-content{background:#fff;border-radius:15px;padding:20px;max-width:500px;width:90%;text-align:center}
+.confirmation-title{margin-bottom:15px;color:#663a99}
+.confirmation-contestant{display:flex;align-items:center;gap:5px;background:#f0e6ff;border-radius:15px;padding:5px 10px;margin:5px;font-size:12px}
+.confirmation-buttons{display:flex;justify-content:center;gap:10px;margin-top:15px}
+.confirm-btn.confirm{background:#87b78a;color:#fff;border:none;padding:8px 20px;border-radius:20px;cursor:pointer;opacity:0.95}
+.confirm-btn.cancel{background:#d39b9b;color:#fff;border:none;padding:8px 20px;border-radius:20px;cursor:pointer;opacity:0.95}
+
+.voting-status{display:none;text-align:center;padding:10px;margin:15px 0;background:#fff3cd;border-radius:8px;color:#856404;font-weight:bold}
+
+/* Fixed bottom basket */
+.vote-basket{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:3px solid #663a99;padding:12px 10px;box-shadow:0 -5px 15px rgba(0,0,0,.15);z-index:1500;transform:translateY(100%);transition:transform .28s}
+.vote-basket.visible{transform:translateY(0)}
+.basket-title{text-align:center;color:#663a99;font-weight:700;margin-bottom:8px}
+.basket-contestants{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;min-height:48px}
+.basket-contestant{display:flex;align-items:center;gap:8px;background:#f0e6ff;border-radius:20px;padding:5px 10px;font-size:14px;cursor:pointer}
+.basket-contestant img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+
+@media(max-width:767px){
+  .vote-grid{grid-template-columns:1fr}
+  nav{justify-content:flex-start}
+  .vote-container{margin:10px;padding:15px}
+  .vote-basket{padding:10px}
+  .basket-contestant{font-size:12px;padding:3px 8px}
+  .basket-contestant img{width:25px;height:25px}
+}

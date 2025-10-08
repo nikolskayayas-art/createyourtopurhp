@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Streaming & Voting Guide - HipHop Princess</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="participants.html">Participants</a>
+    <a href="vote.html">Voting</a>
+    <a href="streaming.html" class="active">Streaming Guide</a>
+  </nav>
+
+  <div class="guide-container">
+    <h1 id="page-title">Streaming & Voting Guide</h1>
+
+    <div class="header-controls">
+      <div class="language-selector" title="Select language">
+        <label for="language-select" id="language-label">Language:</label>
+        <select id="language-select" aria-label="Language">
+          <option value="ru">Русский</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="current-time" id="current-time" title="Current Korea time">
+        <strong id="time-label">KST (Korea):</strong>
+        <span id="time-display" style="margin-left:8px;">00:00</span>
+      </div>
+    </div>
+
+    <div class="sections">
+      <div class="panel">
+        <h2>Streaming</h2>
+
+        <div class="accordion" id="youtube-accordion">
+          <div class="accordion-header">
+            <span id="youtube-title">Streaming on YouTube</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="youtube-content"></div>
+        </div>
+
+        <div class="accordion" id="spotify-accordion">
+          <div class="accordion-header">
+            <span id="spotify-title">Streaming on Spotify</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="spotify-content"></div>
+        </div>
+
+        <div class="accordion" id="applemusic-accordion">
+          <div class="accordion-header">
+            <span id="applemusic-title">Streaming on Apple Music</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="applemusic-content"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Voting</h2>
+
+        <div class="accordion" id="inkigayo-accordion">
+          <div class="accordion-header">
+            <span id="inkigayo-title">INKIGAYO</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="inkigayo-content"></div>
+        </div>
+
+        <div class="accordion" id="mcountdown-accordion">
+          <div class="accordion-header">
+            <span id="mcountdown-title">M COUNTDOWN</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="mcountdown-content"></div>
+        </div>
+
+        <div class="accordion" id="theshow-accordion">
+          <div class="accordion-header">
+            <span id="theshow-title">THE SHOW</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="theshow-content"></div>
+        </div>
+
+        <div class="accordion" id="musicbank-accordion">
+          <div class="accordion-header">
+            <span id="musicbank-title">MUSIC BANK & SHOW! MUSIC CORE</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="musicbank-content"></div>
+        </div>
+
+        <div class="accordion" id="showchampion-accordion">
+          <div class="accordion-header">
+            <span id="showchampion-title">SHOW CHAMPION</span>
+            <span class="accordion-icon">▼</span>
+          </div>
+          <div class="accordion-content" id="showchampion-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="https://t.me/illit_belift" style="opacity: 0.3; color: white; text-decoration: none; font-size: 14px;">cr info</a>
+  </div>
+  <script src="app.js">
+  </script>
+</body>
+</html>
