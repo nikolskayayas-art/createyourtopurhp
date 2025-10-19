@@ -1,3 +1,19 @@
+/* Общие стили */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: white; /* Изменено на белый */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Навигация */
 nav {
   width: 100%;
@@ -34,19 +50,6 @@ nav a.active {
   background: rgba(255, 255, 255, 0.9);
   color: #7a1fd0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #4a5cd8 0%, #663a99 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .header-img {
@@ -55,20 +58,19 @@ body {
   object-fit: cover;
   display: block;
   background: linear-gradient(135deg, #4a5cd8 0%, #663a99 100%);
-  transition: opacity 0.5s ease;
 }
 
 .container {
   max-width: 1000px;
   width: 100%;
   background: white;
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
   padding: 20px;
-  margin-top: -5px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 200px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 h1 { 
@@ -358,13 +360,14 @@ h1 {
   margin-top: 15px; 
   font-size: 0.9em; 
   opacity: 0.4; 
+  color: #666;
 }
 
 /* Планшеты */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
-    border-radius: 10px 10px 0 0;
+    margin: 15px;
   }
   
   h1 {
@@ -399,7 +402,7 @@ h1 {
   
   .container {
     padding: 12px;
-    margin-top: 0;
+    margin: 10px;
   }
   
   h1 {
@@ -426,7 +429,7 @@ h1 {
   .format-input {
     width: 60px;
     padding: 8px;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
   
   .format-btn {
@@ -441,7 +444,7 @@ h1 {
   }
   
   .search-box input {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
   
   .pyramid-container {
@@ -489,34 +492,10 @@ h1 {
   }
   
   .remove-btn {
-  position: absolute; 
-  top: -5px; 
-  right: -5px;
-  width: 18px; 
-  height: 18px; 
-  background: #ff4d4d; 
-  color: white;
-  border-radius: 50%; 
-  font-size: 12px; 
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
-  cursor: pointer; 
-  opacity: 0; 
-  transition: opacity 0.2s ease; 
-}
-
-.slot:hover .remove-btn { 
-  opacity: 1; 
-}
-  .remove-btn {
-  opacity: 0 !important;
-  transition: opacity 0.2s ease !important;
-}
-
-.slot:hover .remove-btn {
-  opacity: 1 !important;
-}
+    width: 18px; 
+    height: 18px; 
+    font-size: 12px; 
+  }
   
   .contestants-list {
     max-height: 280px;
@@ -570,7 +549,6 @@ h1 {
   }
 }
 
-
 /* Анимации свечения для короны и кружочков */
 @keyframes glow-pulse {
   0% { 
@@ -615,15 +593,4 @@ h1 {
       0 0 16px rgba(122, 31, 208, 0.8),
       0 0 2px rgba(0,0,0,0.6);
   }
-}
-.contestant-img {
-  background: #f0f0f0;
-  background-image: linear-gradient(90deg, #f0f0f0 0px, #e8e8e8 40px, #f0f0f0 80px);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
