@@ -17,7 +17,7 @@ body {
 /* Навигация */
 nav {
   width: 100%;
-  background: #7a1fd0;
+  background: #000000;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -48,7 +48,7 @@ nav a:hover {
 
 nav a.active {
   background: rgba(255, 255, 255, 0.9);
-  color: #7a1fd0;
+  color: #000000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
