@@ -1,0 +1,36 @@
+/* Единая навигация для всех страниц */
+nav {
+  width: 100%;
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background: #333;
+}
+
+nav span {
+  color: white;
+  font-weight: bold;
+}
